@@ -1,0 +1,46 @@
+# Getting Started
+
+###  1. Generar las clases que van a definir nuestro MVC
+
+entity ----> Cada una de las distintas tablas que van a existir en BD
+repository ----> Es el equivalente al dao y es el que contendrá los métidos que ejecutarán las
+				 consultas a través de Hibernate 
+service ---> La fachada. El puente entre el reporitorio y el controlador que aporta la lógica necesaria
+			 para que el controlador no tenga carga de código y pueda limitarse a pintar lo que el servicio le
+			 ofrece transformado, que son los datos consultados desde el repositorio correspondiente
+controlador --> Se encarga de pintar los datos procesados por el servicio, si procede 
+
+
+### 2. Definir la conexión con la base de datos
+
+	src/main/resources/application.propperties
+	
+	spring.datasource.url = "jdbc://_CONECTOR_://url_base_de_datos:puerto/nombre_bd?useSSL=false&serverTimezone="Europe/Madrid"
+	
+|- useSSL = false --> Hay que ponerlo así para que funcione inicialmente
+|- serverTimezone = 'Codificacion_zona_horaria' 
+
+	spring.datasource.username = usuario_bd
+	
+	spring.datasource.password = 1234
+	
+	spring.datasource.driver-class-name= com.mysql.cj.jdbc.Driver
+	
+	spring.jpa.database-platform = org.hibernate.dialect.MySQL8Dialect --> Seleccionar el correspondiente al 																						 																						   utilizado
+	
+	spring.jpa.show-sql=true ---> Escupe información sobre las consultas a la base de datos
+	
+	spring.jpa.hibernate.ddl-auto=
+	
+* = ddl-auto	
+	|- create: crea contenido a la base de datos cada vez que se conecte
+	|- create-drop: crea y destruye el esquema al final de la sesión
+	|- none: no se ejecuta ninguna acción cuando se inicie sesión en la base de datos
+	|- update: actualiza la base de datos sin borrar ni volver a crear
+	|- validate: 
+		
+	logging.level.org.hibernate.SQL=debug ---> Activar log del ORM sobre SQL en debug time
+	
+	
+	
+	

@@ -1,0 +1,5 @@
+package com.springbootbase.app.repository;
+
+public interface UserRepository {
+
+}

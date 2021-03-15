@@ -1,0 +1,47 @@
+# Getting Started
+
+### Reference Documentation
+For further reference, please consider the following sections:
+
+* [Official Apache Maven documentation](https://maven.apache.org/guides/index.html)
+* [Spring Boot Maven Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/2.4.3/maven-plugin/reference/html/)
+* [Create an OCI image](https://docs.spring.io/spring-boot/docs/2.4.3/maven-plugin/reference/html/#build-image)
+* [Spring Boot DevTools](https://docs.spring.io/spring-boot/docs/2.4.3/reference/htmlsingle/#using-boot-devtools)
+* [Spring Data JPA](https://docs.spring.io/spring-boot/docs/2.4.3/reference/htmlsingle/#boot-features-jpa-and-spring-data)
+* [Spring Web](https://docs.spring.io/spring-boot/docs/2.4.3/reference/htmlsingle/#boot-features-developing-web-applications)
+
+### Guides
+The following guides illustrate how to use some features concretely:
+
+* [Accessing Data with JPA](https://spring.io/guides/gs/accessing-data-jpa/)
+* [Accessing data with MySQL](https://spring.io/guides/gs/accessing-data-mysql/)
+* [Building a RESTful Web Service](https://spring.io/guides/gs/rest-service/)
+* [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
+* [Building REST services with Spring](https://spring.io/guides/tutorials/bookmarks/)
+
+###  1. Generar las clases que van a definir nuestro MVC
+
+entity ----> Cada una de las distintas tablas que van a existir en BD
+repository ----> Es el equivalente al dao y es el que contendrá los métidos que ejecutarán las
+				 consultas a través de Hibernate 
+service ---> La fachada. El puente entre el reporitorio y el controlador que aporta la lógica necesaria
+			 para que el controlador no tenga carga de código y pueda limitarse a pintar lo que el servicio le
+			 ofrece transformado, que son los datos consultados desde el repositorio correspondiente
+controlador --> Se encarga de pintar los datos procesados por el servicio, si procede 
+
+
+### 2. Definir la conexión con la base de datos
+
+	src/main/resources/application.propperties
+	
+	spring.datasource.url = "jdbc://_CONECTOR_://url_base_de_datos:puerto/nombre_bd?useSSL=false&serverTimezone="Europe/Madrid"
+	
+|- useSSL = false --> Hay que ponerlo así para que funcione inicialmente
+|- serverTimezone = 'Codificacion_zona_horaria' 
+
+	spring.datasource.username = usuario_bd
+	
+	spring.datasource.password = 1234
+	
+	spring.datasource.driver-class-name= com.mysql.cj.jdbc.Driver
+	

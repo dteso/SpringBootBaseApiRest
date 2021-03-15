@@ -1,0 +1,62 @@
+# Getting Started
+
+###  1. Generar las clases que van a definir nuestro MVC
+
+entity ----> CLASE - Anotación: @Entity - Cada una de las distintas tablas que van a existir en BD
+|___________________________________________________________________________________________________________________________________________
+|
+| Dentro de entity, cada propiedad de la base de datos va a estar identificada con la anotación @Column que tiene sus propios atributos     | tales como:
+|		* name: 	aunque si no se indica un name, el nombre de la columna quedará definido por el nombre
+|			    	de la propiedad, puede customizarse y será el que figure realmente en base de datos
+|		* size: 	para campos tipo String, estaría estableciendo el maxlength
+|		* nullable: (true o false) para indicar si el campo es requerido false
+|		* unique: 	impide la coexistencia del mismo valor en este campo para dos registros distintos
+|
+|___________________________________________________________________________________________________________________________________________
+
+repository ----> INTERFAZ - Anotación: @Repository - Es el equivalente al dao y es el que contendrá los métidos que ejecutarán las
+				 consultas a través de Hibernate 
+
+service ---> La fachada. El puente entre el reporitorio y el controlador que aporta la lógica necesaria
+			 para que el controlador no tenga carga de código y pueda limitarse a pintar lo que el servicio le
+			 ofrece transformado, que son los datos consultados desde el repositorio correspondiente
+
+controller --> Se encarga de pintar los datos procesados por el servicio, si procede 
+
+
+### 2. Definir la conexión con la base de datos
+
+	src/main/resources/application.propperties
+	
+	spring.datasource.url = "jdbc:_CONECTOR_://url_base_de_datos:puerto/nombre_bd?useSSL=false&serverTimezone="Europe/Madrid"
+	
+|- useSSL = false --> Hay que ponerlo así para que funcione inicialmente
+|- serverTimezone = 'Codificacion_zona_horaria' 
+
+	spring.datasource.username = usuario_bd
+	
+	spring.datasource.password = 1234
+	
+	spring.datasource.driver-class-name= com.mysql.cj.jdbc.Driver
+	
+	spring.jpa.database-platform = org.hibernate.dialect.MySQL8Dialect --> Seleccionar el correspondiente al 																						 																						   utilizado
+	
+	spring.jpa.show-sql=true ---> Escupe información sobre las consultas a la base de datos
+	
+	spring.jpa.hibernate.ddl-auto=
+	
+* = ddl-auto	
+	|- create: crea contenido a la base de datos cada vez que se conecte
+	|- create-drop: crea y destruye el esquema al final de la sesión
+	|- none: no se ejecuta ninguna acción cuando se inicie sesión en la base de datos
+	|- update: actualiza la base de datos sin borrar ni volver a crear
+	|- validate: 
+		
+	logging.level.org.hibernate.SQL=debug ---> Activar log del ORM sobre SQL en debug time
+	
+### 3. Iniciamos la aplicación para que la/s entidad/es generada/s 
+	
+click derecho sobre el proyecto RunAs/SpringBootApp
+
+### 4. Se habrá generado la tabla y podremos verlo a través del manager o IDE configurado para el control de la base de datos MySQL
+	

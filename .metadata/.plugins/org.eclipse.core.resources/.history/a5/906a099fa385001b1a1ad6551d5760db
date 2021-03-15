@@ -1,0 +1,49 @@
+package com.springbootbase.app.service;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+import com.springbootbase.app.entity.User;
+import com.springbootbase.app.repository.UserRepository;
+
+@Service
+public class UserServiceImpl implements UserService{
+	
+	// SpringFramework usa injección de dependencias,
+	// De esta forma, gracias al Autowired estamos pudiendo utilizar
+	// la clase del repositorio que necesitamos inyectada sin necesidad
+	// de hacer un new.
+	@Autowired
+	private UserRepository userRepository;
+
+	@Override
+	public Iterable<User> findAll() {
+		return userRepository.findAll();
+	}
+
+	@Override
+	public Page<User> findAll(Pageable pageable) {
+		return userRepository.findAll(pageable);
+	}
+
+	@Override
+	public Optional<User> findById(Long id) {
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public User save(User user) {
+		return userRepository.save(user);
+	}
+
+	@Override
+	public void deleteById(Long id) {
+		userRepository.deleteById(id);		
+	}
+	
+
+}
