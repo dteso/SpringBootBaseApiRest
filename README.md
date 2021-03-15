@@ -34,21 +34,20 @@ Spring Starter te ayuda a generar tu proyecto, básica y simplemente, nombrando 
 ###  1. Generar las clases que van a definir nuestro MVC
 
 entity ----> CLASE - Anotación: @Entity - Cada una de las distintas tablas que van a existir en BD
-|___________________________________________________________________________________________________________________________________________
-|
-| Dentro de entity, cada propiedad o campo de la base de datos va a estar identificada con la anotación @Column que tiene sus propios       | atributos tales como:
-|		* name: 	aunque si no se indica un name, el nombre de la columna quedará definido por el nombre
-|			    	de la propiedad, puede customizarse y será el que figure realmente en base de datos
-|		* size: 	para campos tipo String, estaría estableciendo el maxlength
-|		* nullable: (true o false) para indicar si el campo es requerido false
-|		* unique: 	impide la coexistencia del mismo valor en este campo para dos registros distintos
-|
-|___________________________________________________________________________________________________________________________________________
+
+
+Dentro de entity, cada propiedad o campo de la base de datos va a estar identificada con la anotación @Column que tiene sus propios atributos tales como:
+		- name: 	aunque si no se indica un name, el nombre de la columna quedará definido por el nombre
+			    	de la propiedad, puede customizarse y será el que figure realmente en base de datos
+		- size: 	para campos tipo String, estaría estableciendo el maxlength
+		- nullable: (true o false) para indicar si el campo es requerido false
+		- unique: 	impide la coexistencia del mismo valor en este campo para dos registros distintos
+
 
 repository ----> INTERFAZ - Anotación: @Repository - Es el equivalente al dao y es el que contendrá los métidos que ejecutarán las
 				 consultas a través de Hibernate 
 
-service ---> La fachada. Se compone de una interface declarativa y una clase implementadora. Es el puente entre el reporitorio y el 			 			 controlador que aporta la lógica necesaria	 para que el controlador no tenga carga de código y pueda limitarse a pintar lo que 			 el servicio le ofrece transformado, que son los datos consultados desde el repositorio correspondiente.
+service ---> La fachada. Se compone de una interface declarativa y una clase implementadora. Es el puente entre el reporitorio y el controlador que aporta la lógica necesaria para que el controlador no tenga carga de código y pueda limitarse a pintar lo que  el servicio le ofrece transformado, que son los datos consultados desde el repositorio correspondiente.
 
 controller --> Se encarga de pintar los datos procesados por el servicio, si procede.
 
@@ -59,8 +58,8 @@ controller --> Se encarga de pintar los datos procesados por el servicio, si pro
 	
 	spring.datasource.url = "jdbc:_CONECTOR_://url_base_de_datos:puerto/nombre_bd?useSSL=false&serverTimezone="Europe/Madrid"
 	
-|- useSSL = false --> Hay que ponerlo así para que funcione inicialmente
-|- serverTimezone = 'Codificacion_zona_horaria' 
+ - useSSL = false --> Hay que ponerlo así para que funcione inicialmente
+ - serverTimezone = 'Codificacion_zona_horaria' 
 
 	spring.datasource.username = usuario_bd
 	
@@ -68,18 +67,18 @@ controller --> Se encarga de pintar los datos procesados por el servicio, si pro
 	
 	spring.datasource.driver-class-name= com.mysql.cj.jdbc.Driver
 	
-	spring.jpa.database-platform = org.hibernate.dialect.MySQL8Dialect --> Seleccionar el correspondiente al 																						 																						   utilizado
+	spring.jpa.database-platform = org.hibernate.dialect.MySQL8Dialect --> Seleccionar el correspondiente al  utilizado
 	
 	spring.jpa.show-sql=true ---> Escupe información sobre las consultas a la base de datos
 	
-	spring.jpa.hibernate.ddl-auto=
+	spring.jpa.hibernate.ddl-auto=create | ( ver opciones... )
 	
-* = ddl-auto	
-	|- create: crea contenido a la base de datos cada vez que se conecte
-	|- create-drop: crea y destruye el esquema al final de la sesión
-	|- none: no se ejecuta ninguna acción cuando se inicie sesión en la base de datos
-	|- update: actualiza la base de datos sin borrar ni volver a crear
-	|- validate: 
+ - ddl-auto	
+	- create: crea contenido a la base de datos cada vez que se conecte
+	- create-drop: crea y destruye el esquema al final de la sesión
+	- none: no se ejecuta ninguna acción cuando se inicie sesión en la base de datos
+	- update: actualiza la base de datos sin borrar ni volver a crear
+	- validate: 
 		
 	logging.level.org.hibernate.SQL=debug ---> Activar log del ORM sobre SQL en debug time
 	
@@ -95,10 +94,10 @@ click derecho sobre el proyecto RunAs/SpringBootApp
 2. Extenderá de JpaRepository al que se le van a pasar las clases correspondientes, normalemente la clase a mapear en BD y el tipo de su Id
 
 *******************************************************************************************************************************************
-*
+
 *  NOTA: La interfaz CrudRepository extiende de Repository y JpaRepository extiende de PagingAndSortingRepository y QueryByExampleExecutor. *  Si vamos a paginar del lado del servidor, vamos a necesitar realizar las consultas con los parámetros de paginación como atributos de la 
 *  misma. Con CrudRepository vamos a tener que paginar nosotros en el front o decalarar métodos adicionales. Jpa ofrece una implementación  *  más completa
-*
+
 *******************************************************************************************************************************************
 
 
@@ -157,11 +156,10 @@ como JPA implementa métodos transaccionales de forma que hay que decir con la a
 
 a partir de aquí vamos a poder definir el comportamiento para cada verbo PUT; POST; GET; DELETE mediante las anotaciones correspondientes
 
-	@GetMapping("/{id}")		|
-	@PostMapping					|____ Esto equivale a @RequstMapping(method = (POST))	
-	@PutMapping("/{id}")		|														 (PUT)	
-	@DeleteMapping("/{id}")	|														 (GET)
-																							(DELETE)		
+	@GetMapping("/{id}") |  @RequstMapping(method = (GET))	
+	@PostMapping |  @RequstMapping(method = (POST))					
+	@PutMapping("/{id}") |  @RequstMapping(method = (PUT))																@DeleteMapping("/{id}")	| @RequstMapping(method = (DELETE))														
+																							
 	
 	
 	
